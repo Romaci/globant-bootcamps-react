@@ -15,36 +15,56 @@ class App extends React.Component{
         amountOfMoney:-1,
         hasVehicle: false,
       }
-      this.handleChange = this.handleChange.bind(this);
+      this.handleInputChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
     
-    handleChange(event) {
+  handleChange(event) {
   const {name, value, type, checked} = event.target;
   type === "checkbox" ? this.setState({ [name]: checked }) : this.setState({ [name]: value })
-  
-}
+  }
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+  handleSubmit(event) {
+    return(
+      <Link> </Link>
+    )
+  }
    
 render() {
   return (
+    <Router>
       <div>  
         <form className="form" onSubmit={this.handleSubmit}>
-          <div>
-            <span>Username:</span>
-            <input type="text" name="userName" placeholder="User Name" onChange={this.handleChange}/>
-          </div>
-          <div>
-            <span>Amount of money:</span>
-            <input type="text" name="amountOfMoney" placeholder="Amount of money" onChange={this.handleChange} />
-          </div>
-          <div>
-            <label>
-              <input type="checkbox" name="hasVehicle" checked={this.state.hasVehicle} onChange={this.handleChange}/>
+          <label>
+            Username:
+            <input type="text" name="userName" placeholder="User Name" onChange={this.handleInputChange}/>
+          </label>
+          <br/>
+          <label>
+            Amount of money:
+            <input type="text" name="amountOfMoney" placeholder="Amount of money" onChange={this.handleInputChange} />
+          </label>
+          <br/>
+          <label>
               "I have a vehicle"
-            </label>
-          </div>
+              <input type="checkbox" name="hasVehicle" checked={this.state.hasVehicle} onChange={this.handleInputChange}/>
+          </label>
+          <br/>
         </form>
-        <Vehicles/>
+        <Link to="/Vehicles">Summit</Link>
+        <br/>
+        <Link to="/">Back</Link>
       </div>
+      <Route path="/Vehicles" component={Vehicles} />
+    </Router>
     )
   }
 }
