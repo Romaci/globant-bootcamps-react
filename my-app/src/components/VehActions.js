@@ -1,4 +1,4 @@
-import React from "react"
+import React, {Fragment} from "react"
 import ReactDOM from "react-dom"
 
 
@@ -25,11 +25,11 @@ class VehAction extends React.Component {
     
     render() {
         return (
-            <div>
+            <>
                 <h4> Amount: {this.state.count}  </h4>
                 <button name="increment" onClick={this.handleClick}>Buy</button>
                 <button name="decrement" onClick={this.handleClick}>Sell</button>
-            </div>
+            </>
         )
     }
 }
